@@ -1,0 +1,31 @@
+스프링(Spring) 프레임워크
+	-. Expert One on J2EE Development without EJB, Rod Johnson
+	-. EJB를 사용하지 않고 엔터프라이즈 애플리케이션 개발 방법 소개
+	-. 스프링은 엔터프라이즈 애플리케이션에서 필요로 하는 기능을 제공하는 프레임워크
+	-. DI, AOP, 트랜잭션, 시큐리티 등의 기능을 제공
+
+스프링 프레임워크의 특징
+	-. 상대적으로(EJB) 가벼운 JavaEE 컨테이너로 기존 JavaEE 기능 다수를 제공
+	-. POJO 기반으로 작성, 테스트 및 배포가 쉬움
+	-. 다른 프레임워크와의 연동 지원
+	-. 설정 파일 변경만으로도 소스 수정없이 클래스 사이의 새로운 의존 관계 설정
+	-. 
+
+[bash]
+cd %ECLIPSE_WORKSPACE_HOME%
+$ git clone
+
+https://github.com/junkiebyte/Spring-MVC-Project.git jvx330
+
+롬북 다운받음
+
+C:\PSH\eclipse>java -jar lombok.jar
+
+HELP -> 마켓에서 스프링3 다운받음
+
+asm <--------core <-------- beans
+		<------- expression <---------- context <--------- transaction
+
+
+
+
