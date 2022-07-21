@@ -11,7 +11,12 @@ public class AppMain {
 		
 		//스프링, 클래스만들기->관계설정
 		Foo foo = context.getBean("foo", Foo.class);
-		System.out.println(foo);		
+		System.out.println(foo);
+		
+		//객체 재사용함 확인가능
+		Foo foo2 = context.getBean("foo2", Foo.class);
+		System.out.println(foo2);
+		
 		context.close();
 		
 		//기존 자바
