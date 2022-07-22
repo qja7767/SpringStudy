@@ -1,4 +1,4 @@
-package com.varxyz.jvx330.jdbc.example2;
+package com.varxyz.jvx330.jdbc.example3;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,8 +21,7 @@ public class CustomerDaoTest {
 		findCustomerByRegDate(dao);
 		findCustomerByEmail(dao);
 		countCustomers(dao);
-		context.close();
-		
+		context.close();		
 	}
 	
 	public static void findAllCustomers(CustomerDao dao) {

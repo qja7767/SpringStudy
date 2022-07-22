@@ -1,4 +1,4 @@
-package com.varxyz.jvx330.jdbc.example2;
+package com.varxyz.jvx330.jdbc.example4;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,28 +10,28 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import com.varxyz.jvx330.jdbc.Customer;
 import com.varxyz.jvx330.jdbc.DataSourceConfig;
 import com.varxyz.jvx330.jdbc.example1.AddCustomerDao;
+import com.varxyz.jvx330.jdbc.example3.CustomerDao3;
 
 public class CustomerDaoTest {
 	public static void main(String[] args) {
 		AnnotationConfigApplicationContext context =
 				new AnnotationConfigApplicationContext(DataSourceConfig.class);
 		
-		CustomerDao dao = context.getBean("customerDao", CustomerDao.class);
+		CustomerDao3 dao = context.getBean("customerDao", CustomerDao3.class);
 		findAllCustomers(dao);
 		findCustomerByRegDate(dao);
 		findCustomerByEmail(dao);
 		countCustomers(dao);
-		context.close();
-		
+		context.close();		
 	}
 	
-	public static void findAllCustomers(CustomerDao dao) {
+	public static void findAllCustomers(CustomerDao3 dao) {
 		System.out.println("=====================================");
 		System.out.println("[findAllCustomers()]");
 		dao.findAllCustomer().forEach(c -> System.out.println(c));		
 	}
 	
-	public static void findCustomerByRegDate(CustomerDao dao) {
+	public static void findCustomerByRegDate(CustomerDao3 dao) {
 		System.out.println("=====================================");
 		System.out.println("ByRegDate");
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -48,14 +48,14 @@ public class CustomerDaoTest {
 		}
 	}
 	
-	public static void findCustomerByEmail(CustomerDao dao) {
+	public static void findCustomerByEmail(CustomerDao3 dao) {
 		System.out.println("=====================================");
 		System.out.println("findCustomerByEmail");
 		dao.findCustomerByEmail("qja1@java.com");
 		System.out.println(dao.findCustomerByEmail("qja1@java.com"));
 	}
 	
-	public static void countCustomers(CustomerDao dao) {
+	public static void countCustomers(CustomerDao3 dao) {
 		System.out.println("=====================================");
 		System.out.println("Count" + dao.countCustomers());		
 	}

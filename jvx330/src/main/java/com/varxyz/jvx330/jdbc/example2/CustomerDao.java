@@ -53,7 +53,7 @@ public class CustomerDao {
 	
 	public Customer findCustomerByEmail(String email) {
 		String sql = "SELECT cid, email, passwd, name, ssn, phone, regDate"
-				+ " FROM Customer WHERE eamil=?";
+				+ " FROM Customer WHERE email=?";
 		
 		return jdbcTemplate.queryForObject(sql, new RowMapper<Customer>() {
 			
