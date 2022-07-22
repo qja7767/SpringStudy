@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.varxyz.jvx330.jdbc.Customer;
 
+//RowMapper안쓰고 빈써서 여기서 파일1개로 해결한 리팩토링
 public class CustomerDao {
 	private JdbcTemplate jdbcTemplate;
 	
