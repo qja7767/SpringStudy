@@ -3,8 +3,11 @@ package com.varxyz.jvx330.jdbc;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.varxyz.jvx330.jdbc.example1.AddCustomerDao;
 import com.varxyz.jvx330.jdbc.example1.AddCustomerDataSourceDao;
+import com.varxyz.jvx330.jdbc.example2.CustomerDao;
 
 
 
@@ -25,8 +28,23 @@ public class DataSourceConfig {
 	}
 	
 	@Bean
+	public JdbcTemplate jdbcTemplate() {
+		return new JdbcTemplate(dataSource());
+	}
+	
+	@Bean
 	public AddCustomerDataSourceDao AddCustomerDataSourceDao() {
 		return new AddCustomerDataSourceDao(dataSource());
+	}
+	
+	@Bean
+	public AddCustomerDao addCustomerDao() {
+		return new AddCustomerDao(dataSource());	
+	}
+	
+	@Bean
+	public CustomerDao customerDao() {
+		return new CustomerDao(dataSource());
 	}
 	
 }

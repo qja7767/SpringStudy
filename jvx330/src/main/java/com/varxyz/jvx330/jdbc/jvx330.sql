@@ -9,4 +9,4 @@ CREATE TABLE Customer(
 )AUTO_INCREMENT = 1001;
 
 SELECT * FROM Customer;
-
+SELECT count(*) FROM Customer;
