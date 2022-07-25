@@ -44,7 +44,7 @@ public class AddCustomerDao {
 	public void addCustomer2(Customer customer) {
 		String sql = "INSERT INTO Customer (email, passwd, name, ssn, phone)"
 				+ " VALUES (?, ?, ?, ?, ?)";
-		jdbcTemplate.update(sql, customer.getEmail(),  customer.getPasswd(),
+		jdbcTemplate.update(sql, customer.getEmail(), customer.getPasswd(),
 				customer.getName(), customer.getSsn(), customer.getPhone());
 	}
 	

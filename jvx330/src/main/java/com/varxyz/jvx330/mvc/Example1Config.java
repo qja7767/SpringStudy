@@ -1,4 +1,4 @@
-package com.varxyz.jvx330.jdbc.example1;
+package com.varxyz.jvx330.mvc;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
