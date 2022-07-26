@@ -14,7 +14,7 @@ import lombok.ToString;
 public class Account {
 	private long aid;
 	private Customer customer;
-	private String accountNum;
+	private char accountNum;
 	private char accountType;
 	private double balance;
 	private Date regDate;

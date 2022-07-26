@@ -20,28 +20,29 @@ public class AddAccountController {
 	}
 	
 	@PostMapping("/banking/add_account")
-	public String addAccount(HttpServletRequest request, Model model) {
+	public String addAccount(Customer customer, HttpServletRequest request, Model model) {
+		
 		String email = request.getParameter("email");
-
+		
 		AnnotationConfigApplicationContext context =
 				new AnnotationConfigApplicationContext(DataSourceConfig.class);
 		AccountDao Adao = context.getBean("accountDao", AccountDao.class);		
 		
 		CustomerDao Cdao = context.getBean("customerDao", CustomerDao.class);
-		Customer c = Cdao.findCustomerByEmail(email);
-		
-		email = c.getEmail();
+				
 		Cdao.findCustomerByEmail(email);
+		System.out.println(Cdao.findCustomerByEmail(email));			
+		
+		model.addAttribute("customer", customer);
 		
 		context.close();
 		return "banking/add_account2";
 	}
 	
 	@PostMapping("/banking/add_account2")
-	public String addAccount2(HttpServletRequest request, Model model) {
-		String email = request.getParameter("email");
-		String accountType = request.getParameter("accountType");
-		
+	public String addAccount2(Account account, HttpServletRequest request, Model model) {
+		String accountType = request.getParameter("accType");
+
 		if(accountType.equals("SavingsAccount")) {
 			accType = 'S';
 		}else if(accountType.equals("CheckingAccount")) {
@@ -50,15 +51,9 @@ public class AddAccountController {
 		
 		AnnotationConfigApplicationContext context =
 				new AnnotationConfigApplicationContext(DataSourceConfig.class);
-		AccountDao Adao = context.getBean("accountDao", AccountDao.class);		
-		
+		AccountDao Adao = context.getBean("accountDao", AccountDao.class);									
 		CustomerDao Cdao = context.getBean("customerDao", CustomerDao.class);
-		Customer c = Cdao.findCustomerByEmail(email);
-		
-		email = c.getEmail();
-		
-		Account account = null;
-		
+
 		if(accType == 'C') {
 			account = new CheckingAccount();
 		}else if (accType == 'S' ) {
@@ -68,7 +63,7 @@ public class AddAccountController {
 		Adao.addAccount(account);
 		
 		context.close();
-		return "banking/success_add_account";
+		return "banking/success_add_account4";
 	}
 	
 }

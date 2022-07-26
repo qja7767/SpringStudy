@@ -40,14 +40,14 @@ public class AccountDao {
 			args = new Object[] {
 				sa.getAccountNum(), String.valueOf(sa.getAccountType()),
 				sa.getBalance(), sa.getInterestRate(), 0.0,
-				sa.getCustomer().getCid()
+				0
 			};
 		}else {
 			ca = (CheckingAccount)account;
 			args = new Object[] {
 				ca.getAccountNum(), String.valueOf(ca.getAccountType()),
 				ca.getBalance(), ca.getOverdraftAmount(), 0.0,
-				ca.getCustomer().getCid()
+				0
 			};
 		}
 		jdbcTemplate.update(sql, args, types);

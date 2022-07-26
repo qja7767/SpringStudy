@@ -41,6 +41,13 @@ public class CustomerDao {
 		return jdbcTemplate.queryForObject(sql, new CustomerRowMapper(), email);			
 	}
 	
+	public Customer findCidByEmail(String email) {
+		String sql = "SELECT cid"
+				+ " FROM Customer WHERE cid=?";
+		
+		return jdbcTemplate.queryForObject(sql, new CustomerRowMapper(), email);			
+	}
+	
 	public long countCustomers() {
 		String sql = "SELECT count(*) FROM Customer";
 		return jdbcTemplate.queryForObject(sql, Long.class);
