@@ -16,4 +16,14 @@ public class HelloController {
 		mav.addObject("greeting", greeting);
 		return mav;
 	}
+	
+	@RequestMapping("/example1/sayBye")
+	public ModelAndView sayBye() {
+		String greeting = "Bye! 스프링 MVC";
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("example1/bye");
+		mav.addObject("greeting", greeting);
+		return mav;
+	}
 }

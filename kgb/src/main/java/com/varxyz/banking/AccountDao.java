@@ -1,4 +1,4 @@
-package com.varxyz.jvx330.jdbc.example5;
+package com.varxyz.banking;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,10 +17,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import com.varxyz.jvx330.jdbc.Account;
-
-//@Repository
-@Component("accountDao")
 public class AccountDao {
 	private JdbcTemplate jdbcTemplate;
 	
@@ -57,22 +53,6 @@ public class AccountDao {
 		jdbcTemplate.update(sql, args, types);
 	}
 	
-	public List<Account> findAccountsBySsn(String ssn) {
-		String sql = "SELECT a.aid, a.customerId, a.accountNum, a.accType,"
-				+ " a.balance, a.interestRate, a.overAmount, a.regDate"
-				+ " FROM Account a INNER JOIN Customer c "
-				+ " ON a.customerId = c.cid "
-				+ " WHERE c.ssn = ?";
-		return jdbcTemplate.query(sql, new CustomerAccountRowMapper(), ssn);
-	}
 	
-	public List<Account> findAccountsByCustomerId(long customerId) {
-		String sql = "SELECT a.aid, a.customerId, a.accountNum, a.accType,"
-				+ " a.balance, a.interestRate, a.overAmount, a.regDate"
-				+ " FROM Account a INNER JOIN Customer c "
-				+ " ON a.customerId = c.cid "
-				+ " WHERE c.customerId = ?";
-		return jdbcTemplate.query(sql, new CustomerAccountRowMapper(), customerId);
-	}
 	
 }
