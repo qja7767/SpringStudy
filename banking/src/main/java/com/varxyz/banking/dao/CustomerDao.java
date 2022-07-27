@@ -39,8 +39,6 @@ public class CustomerDao {
 		}, userId);
 	}
 	
-	
-	
 	public boolean isUser(String userId, String passwd) {
 		String sql = "SELECT count(*) FROM Customer WHERE email=? AND passwd=?";
 		boolean result = true;

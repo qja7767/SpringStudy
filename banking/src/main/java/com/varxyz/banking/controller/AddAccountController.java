@@ -31,6 +31,7 @@ public class AddAccountController {
 		return "/account/add_account";
 	}
 	
+	//신규 계좌 추가
 	@PostMapping("account/add_account")
 	public String addAccount(HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -52,6 +53,7 @@ public class AddAccountController {
 		return "account/add_success_account";		
 	}
 	
+	//이메일(이메일ID)로 해당 계좌찾기
 	@PostMapping("account/find_account")
 	public String viewAccount(HttpServletRequest request) {
 		String email = request.getParameter("email");
@@ -64,6 +66,7 @@ public class AddAccountController {
 		return "account/view_my_accounts";
 	}
 	
+	//모든 계좌찾기(관리자)
 	@PostMapping("account/find_all_account")
 	public String viewAllAccount(HttpServletRequest request) {
 		
@@ -73,11 +76,17 @@ public class AddAccountController {
 		return "account/view_all_accounts";
 	}
 	
-	/**
-	 * XXX-XX-XXXX 형식의 계좌번호 생성.
-	 * 
-	 * @return
-	 */
+	//로그아웃
+	@GetMapping("login_add/logout")
+	public String doLogout(HttpServletRequest request) {		
+		HttpSession session = request.getSession(false);
+		session.invalidate();		
+		return "login_add/login";
+	}
+	
+	
+	
+	//랜덤 계좌생성기( ex.XXX-XX-XXXX )
 	public String generateAccount() {
 		String numStr = String.valueOf((int)(Math.random() * 100000000));
 		StringBuilder sb = new StringBuilder();

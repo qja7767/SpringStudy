@@ -11,9 +11,14 @@
 <body>
 	${userId}님 안녕하세요<br>
 	<button type="button" onclick='location.href="<c:url value='/account/add_account'/>"'>계좌 신청/조회 시스템</button><br>
-	<button type="button" onclick='location.href="<c:url value='/login_add/logout'/>"'>로그아웃</button><br>
-	<form action="account/view_account" method="post"><br>
-		<input type="submit" value="TEST"/>
+	
+	<form action="logout" method="get"><br>
+		<input type="submit" value="로그아웃"/>
 	</form>
+	
+	<form action="account/view_account" method="post"><br>
+		<input type="submit" value="내정보"/>
+	</form>
+	
 </body>
 </html>
