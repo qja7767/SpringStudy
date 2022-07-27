@@ -15,8 +15,8 @@ public class CustomerServiceImpl implements CustomerService{
 		customerDao.addCustomer(customer);
 	}
 	
-	public boolean isUser(String userId, String passwd) {
-		return customerDao.isUser(userId, passwd);
+	public boolean isValidUser(String userId, String passwd) {
+		return customerDao.isValidUser(userId, passwd);
 	}
 	
 	public Customer getCustomerByUserId(String userId) {

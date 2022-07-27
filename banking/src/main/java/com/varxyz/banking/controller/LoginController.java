@@ -16,17 +16,17 @@ public class LoginController {
 	@Autowired
 	CustomerServiceImpl customerService;
 	
-	@GetMapping("/login_add/login")
+	@GetMapping("/login/login")
 	public String loginForm() {
-		return "login_add/login";
+		return "login/login";
 	}
 	
-	@PostMapping("/login_add/login")
+	@PostMapping("/login/login")
 	public String login( HttpServletRequest request) {
 		String userId = request.getParameter("userId");
 		String passwd = request.getParameter("passwd");
 		
-		if(!customerService.isUser(userId, passwd)) {
+		if(!customerService.isValidUser(userId, passwd)) {
 			request.setAttribute("msg", "아이디 혹은 비밀번호가 틀렸습니다.");
 			request.setAttribute("url", "login_add/login");
 			return "alert";

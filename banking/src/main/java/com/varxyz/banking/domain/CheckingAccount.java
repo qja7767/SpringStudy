@@ -11,7 +11,6 @@ public class CheckingAccount extends Account{
 
 	@Override
 	public void transfer() {
-		// TODO Auto-generated method stub
 		
 	}
 

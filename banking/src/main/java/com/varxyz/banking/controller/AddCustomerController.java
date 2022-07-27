@@ -15,12 +15,12 @@ public class AddCustomerController {
 	@Autowired
 	CustomerServiceImpl customerService;
 	
-	@GetMapping("login_add/add_customer")
+	@GetMapping("login/add_customer")
 	public String addCustomerForm() {
-		return "/login_add/add_customer";
+		return "/login/add_customer";
 	}
 	
-	@PostMapping("login_add/add_customer")
+	@PostMapping("login/add_customer")
 	public String addCustomer(CustomerCommand customerCommand, Model model) {
 		model.addAttribute("customerCommand", customerCommand);	
 		Customer customer = new Customer();
@@ -30,6 +30,9 @@ public class AddCustomerController {
 		customer.setSsn(customerCommand.getSsn());
 		customer.setPhone(customerCommand.getPhone());
 		customerService.addCustomer(customer);
-		return "login_add/add_success_customer";
+		return "login/add_success_customer";
 	}
+	
+	
+	
 }

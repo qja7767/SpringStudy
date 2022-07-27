@@ -17,7 +17,6 @@ ${userId}님 계좌타입을 선택해 주세요.
 <br>
 이메일로 계좌찾기
 <form action="find_account" method="post">
-	<input type="text" name="email"/>
 	<input type="submit" value="조회"/>
 </form>
 
@@ -25,6 +24,12 @@ ${userId}님 계좌타입을 선택해 주세요.
 모든 가입유저 계좌찾기(관리자)
 <form action="find_all_account" method="post">
 	<input type="submit" value="조회"/>
+</form>
+
+<br>
+송금 시스템(transfer)
+<form action="transfer1" method="post">
+	<input type="submit" value="송금"/>
 </form>
 
 

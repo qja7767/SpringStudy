@@ -1,6 +1,6 @@
 package com.varxyz.banking.dao;
 
-import static java.sql.Types.BIGINT;
+import static java.sql.Types.*;
 import static java.sql.Types.CHAR;
 import static java.sql.Types.DOUBLE;
 
@@ -65,11 +65,24 @@ public class AccountDao {
 		return jdbcTemplate.query(sql, new CustomerAccountRowMapper());
 	}
 	
+	//송금
 	public void transfer(double money, String withdrawAccountNum, String depositAccountNum) {
 		String sql = "UPDATE Account SET balance = balance - ? WHERE accountNum=?";
 		String sql2 = "UPDATE Account SET balance = balance + ? WHERE accountNum=?";
 		jdbcTemplate.update(sql, money, withdrawAccountNum);
 		jdbcTemplate.update(sql2, money, depositAccountNum);
+	}
+	
+	//입금
+	public void doWithdraw(double money) {
+		String sql = "UPDATE Account SET balance = balance + ? WHERE accountNum=?";
+		jdbcTemplate.update(sql, money);
+	}
+	
+	//출금
+	public void doDeposit(double money) {
+		String sql = "UPDATE Account SET balance = balance - ? WHERE accountNum=?";
+		jdbcTemplate.update(sql, money);
 	}
 	
 	public void saveInterest(String accountNum, double interestRate) {

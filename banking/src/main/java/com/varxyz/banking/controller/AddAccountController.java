@@ -56,13 +56,11 @@ public class AddAccountController {
 	//이메일(이메일ID)로 해당 계좌찾기
 	@PostMapping("account/find_account")
 	public String viewAccount(HttpServletRequest request) {
-		String email = request.getParameter("email");
-				
-		accountService.getAccounts(email);
-		
-		List<Account> accountList = accountService.getAccounts(email);
+		HttpSession session = request.getSession();
+		String userId = (String)session.getAttribute("userId");
+								
+		List<Account> accountList = accountService.getAccounts(userId);
 		request.setAttribute("accountList", accountList);
-		System.out.println(accountService.getAccounts(email));
 		return "account/view_my_accounts";
 	}
 	
@@ -72,19 +70,16 @@ public class AddAccountController {
 		
 		List<Account> accountList = accountService.getAllAccount();
 		request.setAttribute("accountList", accountList);
-		System.out.println(accountList);
 		return "account/view_all_accounts";
 	}
 	
 	//로그아웃
-	@GetMapping("login_add/logout")
-	public String doLogout(HttpServletRequest request) {		
+	@GetMapping("login/logout")
+	public String doLogout(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 		session.invalidate();		
-		return "login_add/login";
+		return "login/login";
 	}
-	
-	
 	
 	//랜덤 계좌생성기( ex.XXX-XX-XXXX )
 	public String generateAccount() {

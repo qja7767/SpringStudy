@@ -16,7 +16,7 @@
 		<input type="submit" value="로그아웃"/>
 	</form>
 	
-	<form action="account/view_account" method="post"><br>
+	<form action="login/view_myinfo" method="post"><br>
 		<input type="submit" value="내정보"/>
 	</form>
 	
