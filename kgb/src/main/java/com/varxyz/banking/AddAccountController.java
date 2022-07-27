@@ -1,6 +1,7 @@
 package com.varxyz.banking;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -42,7 +43,9 @@ public class AddAccountController {
 	@PostMapping("/banking/add_account2")
 	public String addAccount2(Account account, HttpServletRequest request, Model model) {
 		String accountType = request.getParameter("accType");
+		String accountNum = request.getParameter("accountNum");
 
+		
 		if(accountType.equals("SavingsAccount")) {
 			accType = 'S';
 		}else if(accountType.equals("CheckingAccount")) {
@@ -59,11 +62,15 @@ public class AddAccountController {
 		}else if (accType == 'S' ) {
 			account = new SavingsAccount();
 		}
+		account.setAccountType(accType);
+		account.setAccountNum(accountNum);
+
 		
+		model.addAttribute("account", account);
 		Adao.addAccount(account);
-		
+		System.out.println(account);
 		context.close();
-		return "banking/success_add_account4";
+		return "banking/success_add_account";
 	}
 	
 }
