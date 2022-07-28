@@ -18,7 +18,7 @@ import com.varxyz.banking.service.AccountServiceImpl;
 import com.varxyz.banking.service.CustomerServiceImpl;
 
 @Controller
-public class AddAccountController {
+public class AccountController {
 	
 	@Autowired
 	AccountServiceImpl accountService;
@@ -71,14 +71,6 @@ public class AddAccountController {
 		List<Account> accountList = accountService.getAllAccount();
 		request.setAttribute("accountList", accountList);
 		return "account/view_all_accounts";
-	}
-	
-	//로그아웃
-	@GetMapping("login/logout")
-	public String doLogout(HttpServletRequest request) {
-		HttpSession session = request.getSession(false);
-		session.invalidate();		
-		return "login/login";
 	}
 	
 	//랜덤 계좌생성기( ex.XXX-XX-XXXX )

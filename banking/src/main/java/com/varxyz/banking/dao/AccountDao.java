@@ -44,7 +44,16 @@ public class AccountDao {
 		}
 			
 		jdbcTemplate.update(sql, args, types);
-		System.out.println("계좌신청 완료");
+		System.out.println("addAccount 성공");
+		
+	}
+	
+	//모든 계좌 조회
+	public List<Account> getAllAccounts() {
+		String sql = "SELECT aid, customerId, accountNum, accType, balance,"
+				+ " interestRate, overAmount, regDate FROM Account";
+		
+		return jdbcTemplate.query(sql, new CustomerAccountRowMapper());
 	}
 	
 	//이메일로 계좌 찾기
@@ -57,16 +66,16 @@ public class AccountDao {
 		return jdbcTemplate.query(sql, new CustomerAccountRowMapper(), email);
 	}
 	
-	//모든 계좌 조회
-	public List<Account> getAllAccounts() {
-		String sql = "SELECT aid, customerId, accountNum, accType, balance,"
-				+ " interestRate, overAmount, regDate FROM Account";
+	//계좌번호로 해당계좌 잔액 조회
+	public double getBalance(String accountNum) {
+		String sql = "SELECT a.balance FROM Account a INNER JOIN Customer c ON"
+				+ " a.customerId = c.cid WHERE a.accountNum=?";
 		
-		return jdbcTemplate.query(sql, new CustomerAccountRowMapper());
+		return jdbcTemplate.queryForObject(sql, double.class, accountNum);
 	}
 	
 	//송금
-	public void transfer(double money, String withdrawAccountNum, String depositAccountNum) {
+	public void doTransfer(double money, String withdrawAccountNum, String depositAccountNum) {
 		String sql = "UPDATE Account SET balance = balance - ? WHERE accountNum=?";
 		String sql2 = "UPDATE Account SET balance = balance + ? WHERE accountNum=?";
 		jdbcTemplate.update(sql, money, withdrawAccountNum);
@@ -74,28 +83,16 @@ public class AccountDao {
 	}
 	
 	//입금
-	public void doWithdraw(double money) {
+	public void doDeposit(double money, String accountNum) {
 		String sql = "UPDATE Account SET balance = balance + ? WHERE accountNum=?";
-		jdbcTemplate.update(sql, money);
+		jdbcTemplate.update(sql, money, accountNum);
 	}
 	
 	//출금
-	public void doDeposit(double money) {
+	public void doWithdraw(double money, String accountNum) {
 		String sql = "UPDATE Account SET balance = balance - ? WHERE accountNum=?";
-		jdbcTemplate.update(sql, money);
+		jdbcTemplate.update(sql, money, accountNum);
 	}
 	
-	public void saveInterest(String accountNum, double interestRate) {
-		String sql = "UPDATE Account SET balance = balance + "
-				+ "(balance * (balance / ?)) WHERE accountNum=?";
-		jdbcTemplate.update(sql, interestRate, accountNum);
-	}
-	
-	public long getBalance(String accountNum) {
-		String sql = "SELECT a.balance FROM Account a INNER JOIN Customer c ON"
-				+ " a.customerId = c.cid WHERE a.accountNum=?";
-		
-		return jdbcTemplate.queryForObject(sql, Long.class, accountNum);
-	}
 	
 }

@@ -16,6 +16,7 @@ public class CustomerDao {
 		jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 	
+	//신규회원추가
 	public void addCustomer(Customer customer) {
 		String sql = "INSERT INTO Customer (email, passwd, name, ssn, phone)"
 				+ " VALUES (?, ?, ?, ?, ?)";
@@ -23,9 +24,10 @@ public class CustomerDao {
 				customer.getName(), customer.getSsn(), customer.getPhone());
 	}
 	
+	//아이디로 가입회원 찾기
 	public Customer getCustomerByUserId(String userId){
 		String sql = "SELECT * FROM Customer WHERE email=?";
-		return jdbcTemplate.queryForObject(sql, new RowMapper<Customer>() { //하나만 찾는 메소드 queryForObject
+		return jdbcTemplate.queryForObject(sql, new RowMapper<Customer>() {
 
 			@Override
 			public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -39,6 +41,24 @@ public class CustomerDao {
 		}, userId);
 	}
 	
+	//계좌번호로 가입회원 찾기(transfer시스템에 사용중)
+	public Customer getCustomerByAccountNum(String accountNum) {
+		String sql = "SELECT * FROM Customer c INNER JOIN Account a ON a.customerId = c.cid"
+				+ " WHERE a.accountNum=?";
+		return jdbcTemplate.queryForObject(sql, new RowMapper<Customer>() {
+
+			@Override
+			public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Customer customer = new Customer(rs.getLong("cid"),
+						rs.getString("email"), rs.getString("passwd"), 
+						rs.getString("name"), rs.getString("ssn"),
+						rs.getString("phone"), rs.getTimestamp("regDate"));
+				return customer;
+			}
+		}, accountNum);
+	}
+	
+	//로그인 유효성 검증용
 	public boolean isValidUser(String userId, String passwd) {
 		String sql = "SELECT count(*) FROM Customer WHERE email=? AND passwd=?";
 		boolean result = true;

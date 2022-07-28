@@ -16,7 +16,7 @@
 		받는이 : ${depositCustomerName}<br>
 		받는이 계좌 : ${depositAccNum}<br>
 		
-		보내는 금액 : ${money}<br>
+		금액 : ${money}<br>
 		
 		승인 하려면 비밀번호를 입력하세요
 		<input type="password" name="passwd" required="required"/>

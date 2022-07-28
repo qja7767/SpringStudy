@@ -29,12 +29,20 @@ public class LoginController {
 		if(!customerService.isValidUser(userId, passwd)) {
 			request.setAttribute("msg", "아이디 혹은 비밀번호가 틀렸습니다.");
 			request.setAttribute("url", "login_add/login");
-			return "alert";
+			return "error";
 		}
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("userId", userId);
 		
 		return "main";
+	}
+	
+	//로그아웃
+	@GetMapping("login/logout")
+	public String doLogout(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		session.invalidate();		
+		return "login/login";
 	}
 }

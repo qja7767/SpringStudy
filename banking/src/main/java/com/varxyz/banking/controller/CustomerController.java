@@ -11,7 +11,7 @@ import com.varxyz.banking.domain.CustomerCommand;
 import com.varxyz.banking.service.CustomerServiceImpl;
 
 @Controller
-public class AddCustomerController {
+public class CustomerController {
 	@Autowired
 	CustomerServiceImpl customerService;
 	
