@@ -25,8 +25,15 @@ public class MenuCategoryDao {
 	//모든 메뉴카테고리 조회
 	public List<MenuCategory> getAllMenuCategory() {
 		String sql = "SELECT cateName, cateCode, cateCodeRef FROM MenuCategory";
-		
+				
 		return jdbcTemplate.query(sql, new MenuCategoryRowMapper());
+	}
+	
+	public List<MenuCategory> getMenuCategoryByCateCodeRef(String cateCodeRef) {
+		String sql = "SELECT cateName, cateCode, cateCodeRef FROM MenuCategory"
+				+ " WHERE cateCodeRef=?";
+				
+		return jdbcTemplate.query(sql, new MenuCategoryRowMapper(), cateCodeRef);
 	}
 	
 }

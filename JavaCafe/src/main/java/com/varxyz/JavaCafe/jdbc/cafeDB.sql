@@ -1,6 +1,6 @@
 CREATE TABLE Customer(
 	cid				BIGINT			PRIMARY KEY AUTO_INCREMENT,
-	email			VARCHAR(30)		NOT NULL,
+	email			VARCHAR(30)		NOT NULL, 
 	passwd			VARCHAR(20)		NOT NULL,
 	name			VARCHAR(20)		NOT NULL,
 	ssn				VARCHAR(14)		NOT NULL, -- 123456-7890123
@@ -39,6 +39,7 @@ INSERT INTO MenuCategory (cateName, cateCode)
 VALUES ('카테고리 3', '300');
 
 CREATE TABLE MenuItem (
+	cateCodeRef		VARCHAR(20)		NOT NULL,
 	cateCode		VARCHAR(20)		NOT NULL,
 	menuName		VARCHAR(100)	NOT NULL,
 	menuPrice		DOUBLE			NOT NULL,
@@ -46,9 +47,13 @@ CREATE TABLE MenuItem (
 	menuStock		INT				DEFAULT NULL,
 	menuInfo		VARCHAR(500)	DEFAULT NULL,
 	menuImg			VARCHAR(200)	DEFAULT NULL,
+	menuThumbImg	VARCHAR(200)	DEFAULT NULL,
 	regDate			TIMESTAMP		NOT NULL	DEFAULT CURRENT_TIMESTAMP,
-	FOREIGN KEY (cateCode) REFERENCES MenuCategory(cateCode)
+	FOREIGN KEY (cateCode) REFERENCES MenuCategory(cateCode),
+	FOREIGN KEY (cateCodeRef) REFERENCES MenuCategory(cateCodeRef)
 );
 
 SELECT * FROM MenuItem;
 DROP TABLE MenuItem;
+
+SELECT cateName, cateCode, cateCodeRef FROM MenuCategory;

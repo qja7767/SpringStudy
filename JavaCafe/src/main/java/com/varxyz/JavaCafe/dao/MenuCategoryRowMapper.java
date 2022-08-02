@@ -9,15 +9,15 @@ import com.varxyz.JavaCafe.domain.MenuCategory;
 
 
 public class MenuCategoryRowMapper implements RowMapper<MenuCategory> {
-
+	
 	@Override
 	public MenuCategory mapRow(ResultSet rs, int rowNum)
 			throws SQLException {
-		MenuCategory menuCategory = null;
 		
+		MenuCategory menuCategory = new MenuCategory();
 		menuCategory.setCateName(rs.getString("cateName"));
-		menuCategory.setCateCodeRef(rs.getString("cateCodeRef"));
 		menuCategory.setCateCode(rs.getString("cateCode"));
+		menuCategory.setCateCodeRef(rs.getString("cateCodeRef"));
 		
 		return menuCategory;
 	}

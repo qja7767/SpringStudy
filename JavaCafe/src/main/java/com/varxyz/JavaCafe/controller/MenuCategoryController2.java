@@ -1,5 +1,9 @@
 package com.varxyz.JavaCafe.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,8 +23,11 @@ public class MenuCategoryController2 {
 	MenuCategoryServiceImpl menuCategoryService;	
 	
 	@GetMapping
-	public String addMenuCategoryForm(Model model) {
-		model.addAttribute("menuCategory", new MenuCategory());
+	public String addMenuCategoryForm(HttpServletRequest request ,Model model) {
+		model.addAttribute("menuCategory", new MenuCategory());		
+		List<MenuCategory> menuCategoryList = menuCategoryService.getAllMenuCategory();
+		request.setAttribute("menuCategoryList", menuCategoryList);
+		
 		return "pages/add_category2";
 	}
 	
@@ -31,7 +38,7 @@ public class MenuCategoryController2 {
 		menuCategoryService.addMenuCategory(menuCategory);
 		
 		model.addAttribute("menuCategory", menuCategory);
-		return "pages/add_category2";
+		return "main";
 	}
 	
 	

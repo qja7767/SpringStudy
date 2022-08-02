@@ -22,6 +22,11 @@ public class MenuCategoryServiceImpl implements MenuCategoryService{
 	public List<MenuCategory> getAllMenuCategory() {
 		return menuCategoryDao.getAllMenuCategory();
 	}
+
+	@Override
+	public List<MenuCategory> getMenuCategoryByCateCodeRef(String cateCodeRef) {		
+		return menuCategoryDao.getMenuCategoryByCateCodeRef(cateCodeRef);
+	}
 }
 
 

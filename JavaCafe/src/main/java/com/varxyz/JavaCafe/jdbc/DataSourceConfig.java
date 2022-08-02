@@ -6,7 +6,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.varxyz.JavaCafe.dao.MenuCategoryDao;
+import com.varxyz.JavaCafe.dao.MenuItemDao;
 import com.varxyz.JavaCafe.service.MenuCategoryServiceImpl;
+import com.varxyz.JavaCafe.service.MenuItemServiceImpl;
 
 @Configuration
 public class DataSourceConfig {
@@ -30,7 +32,7 @@ public class DataSourceConfig {
 	}
 	
 	@Bean
-	public MenuCategoryDao accountdao() {
+	public MenuCategoryDao menuCategoryDao() {
 		return new MenuCategoryDao(dataSource());
 	}
 	
@@ -38,6 +40,15 @@ public class DataSourceConfig {
 	public MenuCategoryServiceImpl menuCategoryService() {
 		return new MenuCategoryServiceImpl();
 	}
-
+	
+	@Bean
+	public MenuItemDao menuItemDao() {
+		return new MenuItemDao(dataSource());
+	}
+	
+	@Bean
+	public MenuItemServiceImpl menuItemService() {
+		return new MenuItemServiceImpl();
+	}
 	
 }

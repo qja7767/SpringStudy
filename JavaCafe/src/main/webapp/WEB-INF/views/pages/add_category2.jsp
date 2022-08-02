@@ -11,12 +11,21 @@
 <body>
 <h3>신규 카테고리 추가</h3>
 <form:form method="post" modelAttribute="menuCategory">
+	<label>카테고리 상위분류명</label><select name="cateCodeRef">
+	<c:forEach var="view" items="${menuCategoryList}">
+	<option value="${view.cateCode}">${view.cateName}</option>							
+	</c:forEach>
+	</select>
+	
+	<label>카테고리 하위분류명</label>
+	<form:input path="cateCode"/><br>
+	
 	<label>카테고리 이름</label>
 	<form:input path="cateName"/><br>
-	<label>카테고리 분류 코드1</label>
-	<form:input path="cateCode"/><br>
-		<label>카테고리 분류 코드2(대분류 코드가 없다면 먼저 생성한 뒤에 하위로 넣어야함)</label>
-	<form:input path="cateCodeRef"/><br>
+	
+	
+	
+	
 	<input type="submit" value="완료">
 </form:form>
 
