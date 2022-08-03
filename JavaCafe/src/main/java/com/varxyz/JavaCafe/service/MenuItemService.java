@@ -9,4 +9,6 @@ public interface MenuItemService {
 	public void addMenuItem(MenuItem menuItem);
 	public void addMenuItemImg(MenuImage menuImage);
 	List<MenuItem> getAllMenuItem();
+	List<MenuImage> getMenuImageByMenuItem(String menuImg);
+	List<MenuImage> getAllMenuImage();
 }

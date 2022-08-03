@@ -10,7 +10,7 @@
 </head>
 <body>
 <h3>신규 품목 추가</h3>
-<form:form method="post" modelAttribute="menuItem" enctype="multipart/form-data">
+<form:form method="post" modelAttribute="menuItem">
 	
 	
 	<label>카테고리 분류(대)</label><select name="cateCodeRef">
@@ -41,11 +41,12 @@
 	<form:input path="menuInfo"/><br>
 	
 	<label>상품 이미지 정보</label>
-	<input type="file" name="imgSubmit"/><br>	
+	<form:input type="file" path="menuImg"/><br>	
 	
 	<input type="submit" value="완료">
 	<%=request.getRealPath("/") %>
 </form:form>
+
 
 </body>
 </html>

@@ -27,6 +27,16 @@ public class MenuItemServiceImpl implements MenuItemService{
 	public List<MenuItem> getAllMenuItem() {
 		return menuItemDao.getAllMenuItem();
 	}
+	
+	@Override
+	public List<MenuImage> getMenuImageByMenuItem(String menuImg) {		
+		return menuItemDao.getMenuImageByMenuItem(menuImg);
+	}
+
+	@Override
+	public List<MenuImage> getAllMenuImage() { 
+		return menuItemDao.getAllMenuImage();
+	}
 
 }
 

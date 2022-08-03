@@ -55,6 +55,8 @@ CREATE TABLE MenuItem (
 SELECT * FROM MenuItem;
 !DROP TABLE MenuItem;
 
+menuImg와 imgName 매칭해서 찾기
+
 CREATE TABLE MenuImage(
 	imgCode 		BIGINT 			PRIMARY KEY AUTO_INCREMENT,
 	cateCode		VARCHAR(20)		DEFAULT NULL,

@@ -24,14 +24,13 @@ import com.varxyz.JavaCafe.service.MenuCategoryServiceImpl;
 import com.varxyz.JavaCafe.service.MenuItemServiceImpl;
 
 @Controller("controller.menuItemController")
-@RequestMapping("pages/add_menu_item")
 public class MenuItemController {
 	@Autowired
 	MenuItemServiceImpl menuItemService;
 	@Autowired
 	MenuCategoryServiceImpl menuCategoryService;
 	
-	@GetMapping
+	@GetMapping("pages/add_menu_item")
 	public String addMenuItemForm(Model model, HttpServletRequest request) {
 		model.addAttribute("menuItem", new MenuItem());
 		List<MenuCategory> menuCategoryList =
@@ -41,35 +40,83 @@ public class MenuItemController {
 		return "pages/add_menu_item";
 	}
 	
-	@PostMapping
+	@PostMapping("pages/add_menu_item")
 	public String addMenuItem(@ModelAttribute("menuItem")
 		MenuItem menuItem, Model model, HttpServletRequest request,
 		@RequestParam("imgSubmit") MultipartFile multipartFile ) throws IllegalStateException, IOException {
 		
 		menuItemService.addMenuItem(menuItem);
-		model.addAttribute("menuItem", menuItem);
-		
-		//파일 처리
-		String filePath =
-				"E:\\JAVA\\javaWork\\JavaCafe\\src\\main\\resources\\UploadImg\\";
-		String imgSource =
-				multipartFile.getOriginalFilename();
-		String imgSourceExtension =
-				imgSource.substring(imgSource.lastIndexOf("."));		
-		//UUID - 중복 방지, 고유식별자로 쓰인다고함 + 하이폰이 자동으로 들어가서 제거.
-		String savedImgName =
-				UUID.randomUUID().toString().replaceAll("-", "") + imgSourceExtension;
-		
-		MenuImage menuImg = new MenuImage();
-		menuImg.setImgName(imgSourceExtension);
-		menuImg.setImgSource(imgSource);
-		menuImg.setImgUrl(filePath);
-		menuItemService.addMenuItemImg(menuImg);
-		
-		File file = new File(filePath + savedImgName);
-		
-		multipartFile.transferTo(file);
-		
+		model.addAttribute("menuItem", menuItem);		
+					
 		return "main";		
 	}
+	
+	@GetMapping("pages/add_img")
+	public String addImgForm(Model model, HttpServletRequest request) {
+		return "pages/add_img";
+	}
+	
+	@PostMapping("pages/add_img")
+	public String addImg(Model model, HttpServletRequest request) {
+		return "pages/add_img";
+	}
+	
+	@PostMapping("pages/upload")
+	public String upload(@RequestParam("file") MultipartFile file) {
+		String fileRealName = file.getOriginalFilename(); //파일명을 얻어낼 수 있는 메서드
+		long size = file.getSize(); //파일 사이즈
+		
+		System.out.println("파일명 : "  + fileRealName);
+		System.out.println("용량크기(byte) : " + size);
+		//서버에 저장할 파일이름 fileextension으로 .jsp이런식의  확장자 명을 구함
+		String fileExtension =fileRealName.substring(fileRealName.lastIndexOf(".")
+				,fileRealName.length());
+		String uploadFolder = "C:\\PSH\\my-workSpace\\JavaCafe\\src\\main\\webapp\\resources\\upload_img\\";
+		UUID uuid = UUID.randomUUID();
+		System.out.println(uuid.toString());
+		String[] uuids = uuid.toString().split("-");
+		
+		String uniqueName = uuids[0];
+		System.out.println("생성된 고유문자열" + uniqueName);
+		System.out.println("확장자명" + fileExtension);
+		// File saveFile = new File(uploadFolder+"\\"+fileRealName); uuid 적용 전
+		
+		File saveFile = new File(uploadFolder+"\\"+uniqueName + fileExtension); // 적용 후
+		try {
+			file.transferTo(saveFile); // 실제 파일 저장메서드(filewriter 작업을 손쉽게 한방에 처리해준다.)
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		//DB처리
+		MenuImage menuImg = new MenuImage();
+		
+		menuImg.setCateCode("라떼류");
+		menuImg.setImgName(fileRealName);
+		menuImg.setImgSource(uniqueName);
+		menuImg.setImgUrl(uploadFolder);
+		menuItemService.addMenuItemImg(menuImg);
+		
+		return "main";
+	}
+
+		
+	@GetMapping("/pages/find_all_menu_image")
+	public String findAllMenuImageForm(HttpServletRequest request) {
+			
+		return "pages/find_all_menu_image";
+	}
+		
+	@PostMapping("/pages/find_all_menu_image")
+	public String findAllMenuImage(HttpServletRequest request) {
+			
+		List<MenuImage> menuImageList = menuItemService.getAllMenuImage();
+		request.setAttribute("menuImageList", menuImageList);
+		
+		return "pages/find_all_menu_image";
+	}
+		
 }
+
