@@ -24,7 +24,7 @@
 		<li>이미지 코드 : ${view.imgCode}</li>		
 		<a href="update_menu_item?menuName=${view.menuName}">수정하기</a>
 		<li><img style="width: 300px; height: 300px;" alt="img_area"
-		 src="<c:url value='/resources/upload_img/${view.imgSource}.png'/>">		 
+		 src="<c:url value='/resources/upload_img/${view.imgSource}.jpg'/>">		 
 		 </li>
 	</c:forEach>
 </body>

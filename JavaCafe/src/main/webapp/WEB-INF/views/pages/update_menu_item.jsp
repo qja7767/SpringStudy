@@ -30,7 +30,6 @@
 		 </li>
 	<a href="delete_menu_item?menuName1=${view.menuName}">삭제하기</a>
 	</c:forEach>	
-	<%=request.getRealPath("/") %>
 
 </body>
 </html>

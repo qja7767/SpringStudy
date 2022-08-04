@@ -24,8 +24,7 @@
     <form action="find_all_menu_image" method="post">
     <button type="submit" class="btn btn-outline-secondary" type="button">모든 등록 상품 이미지 코드 찾기</button>
     </form>
-   	<p><img src="<c:url value='/resources/upload_img/01b49a8f.jpg'/>" style="width:200px; height:200px;" ></p>
-   	
+  
 	   	   	
 </body>
 </html>

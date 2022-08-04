@@ -12,7 +12,9 @@
     <meta name="generator" content="Hugo 0.101.0">
 	<link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/album-rtl/">
 	<link rel="stylesheet" href="<c:url value='/resources/css/assets/dist/css/bootstrap.rtl.min.css'/>">
+	<link rel="stylesheet" href="<c:url value='/resources/css/custom/custom.css'/>">
 	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/css_header/headers.css'/>">
+	<script type="text/javascript" src="<c:url value='/resources/js/jquery.js'/>"></script>	
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -64,6 +66,11 @@
         white-space: nowrap;
         -webkit-overflow-scrolling: touch;
       }
+      
+      .card-body {
+      	background: #FCF8E8;
+      }
+      
     </style>
   </head>
   <body>	
@@ -91,65 +98,65 @@
     <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z"/>
   </symbol>
 </svg>
-  
+
 <header>
 <jsp:include page="/resources/css/incl/header.jsp"/>
 </header>
 
 <main>
-
-  <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">ㅁㅁ</h1>
-        <p class="lead text-muted">ㅁㅁ</p>
-        <p>
-          <a href="#" class="btn btn-primary my-2">ㅁㅁ</a>
-          <a href="#" class="btn btn-secondary my-2">aa</a>
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <div class="album py-5 bg-light">
+  <div class="album py-5 bs-gray-400">
     <div class="container">
 
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-      
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">          
 	<c:forEach var="view" items="${menuItemList}">
         <div class="col">
           <div class="card shadow-sm">
-            <img alt="img_area" src="<c:url value='/resources/upload_img/${view.imgSource}.png'/>">
+            <img alt="img_area" src="<c:url value='/resources/upload_img/${view.imgSource}.jpg'/>">
             <rect width="100%" height="100%" fill="#55595c"/>            
             </svg>
             <div class="card-body">
-              <p class="card-text">${view.menuName}</p>
+              <p class="card-text" class="menuName">${view.menuName}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">장바구니 담기</button>
+                  <button type="button" value="${view.menuName}" id="cart" class="btn btn-sm btn-outline-secondary">장바구니 담기</button>
                   <button type="button" class="btn btn-sm btn-outline-secondary">상세정보</button>
                 </div>
-                <small class="text-muted">${view.menuPrice}</small>
+                <small class="text-muted" class="menuPrice">${view.menuPrice}</small>
               </div>
             </div>
           </div>
         </div>
-	</c:forEach>            
-        
+	</c:forEach>  
+	<button type="submit" id="cart2">TEST</button>          
+	   
       </div>
     </div>
   </div>
-
 </main>
 
-<footer class="text-muted py-5">
-  <div class="container">
-    <p class="float-end mb-1">            
-    </p>
-    <p class="mb-1">hi2</p>
-    <p class="mb-0">test1<a href="/">test2</a>test3<a href="../getting-started/introduction/ ">test4</a>.</p>  
-  </div>
-</footer>
-    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="<c:url value='/resources/js/kiosk.js'/>"></script>
+<script>
+
+$('#cart2').on('click', function(){
+$.ajax({
+	url : "test.action",
+	type : "post",
+	data : {
+		name : "뜨루",
+		age : "28",
+		gender : "여자"
+	},
+	success : function(data) {
+				
+     },
+	error : function() {
+		alert("error");
+	}
+	});
+});
+
+</script>
   </body>
 </html>

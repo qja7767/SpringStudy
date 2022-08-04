@@ -67,3 +67,5 @@ CREATE TABLE MenuImage(
 
 SELECT * FROM MenuImage;
 !DROP TABLE MenuImage;
+DELETE FROM MenuImage WHERE imgCode = 12;
+

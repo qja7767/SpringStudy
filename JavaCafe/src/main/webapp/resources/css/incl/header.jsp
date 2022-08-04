@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <meta charset="UTF-8">
-    <style>
+    <style>    	
+	@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+    
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -10,7 +12,10 @@
         -moz-user-select: none;
         user-select: none;
       }
-
+		.myfont {
+		font-family: 'Do Hyeon', sans-serif;
+		font-size: 20px;
+		}
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
@@ -52,6 +57,7 @@
         text-align: center;
         white-space: nowrap;
         -webkit-overflow-scrolling: touch;
+       
       }
     </style>
 
@@ -85,18 +91,20 @@
   </symbol>
 </svg>
  
-  <header>
+
+ 
+    <header>
     <div class="px-3 py-2 text-bg-white">
       <div class="container">
-        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-          <a href="<c:url value='main'/>" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-black text-decoration-none">
-            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
-            Cafe
+        <div class="flex-wrap align-items-center justify-content-center justify-content-lg-start myfont">
+          <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-black text-decoration-none">
+            <img alt="" src="<c:url value='/resources/css/img/logo.png'/>">            
+            MY BUCKS            
           </a>
 
           <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
             <li>
-              <a href="#" class="nav-link text-black">
+              <a href="#" class="nav-link text-secondary">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#home"/></svg>
                 Home
               </a>
@@ -129,11 +137,14 @@
         </div>
       </div>
     </div>
+    <!--
     <div class="px-3 py-2 border-bottom mb-3">
       <div class="container d-flex flex-wrap justify-content-center">
-        <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto" role="search">    
-        </form>
-
+        <div class="text-end">
+          <button type="button" class="btn btn-light text-dark me-2">Login</button>
+          <button type="button" class="btn btn-primary">Sign-up</button>
+        </div>
       </div>
     </div>
+    -->
   </header>
