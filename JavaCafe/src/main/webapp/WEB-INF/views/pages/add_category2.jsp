@@ -16,16 +16,10 @@
 	<option value="${view.cateCode}">${view.cateName}</option>							
 	</c:forEach>
 	</select>
-	
 	<label>카테고리 하위분류명</label>
 	<form:input path="cateCode"/><br>
-	
 	<label>카테고리 이름</label>
 	<form:input path="cateName"/><br>
-	
-	
-	
-	
 	<input type="submit" value="완료">
 </form:form>
 

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import com.varxyz.JavaCafe.dao.MenuItemDao;
-import com.varxyz.JavaCafe.domain.FindMenuItemCommand;
+import com.varxyz.JavaCafe.domain.MenuItemCommand;
 import com.varxyz.JavaCafe.domain.MenuImage;
 import com.varxyz.JavaCafe.domain.MenuItem;
 
@@ -40,10 +40,27 @@ public class MenuItemServiceImpl implements MenuItemService{
 	}
 
 	@Override
-	public List<FindMenuItemCommand> allFindMenu() {
+	public List<MenuItemCommand> allFindMenu() {
 		return menuItemDao.allFindMenu();
 	}
 
+	@Override
+	public List<MenuItemCommand> allFindMenuByMenuName(String menuName) {
+		return menuItemDao.allFindMenuByMenuName(menuName);
+	}
+
+	@Override
+	public void updateMenuItem(MenuItemCommand menuItemCommand, String menuName) {
+		menuItemDao.updateMenuItem(menuItemCommand, menuName);		
+	}
+
+	@Override
+	public void deleteMenuItem(String menuName) {
+		menuItemDao.deleteMenuItem(menuName);
+		
+	}
+	
+	
 }
 
 

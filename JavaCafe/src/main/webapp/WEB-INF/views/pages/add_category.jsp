@@ -17,7 +17,5 @@
 	<form:input path="cateCode"/><br>
 	<input type="submit" value="완료">
 </form:form>
-
-
 </body>
 </html>

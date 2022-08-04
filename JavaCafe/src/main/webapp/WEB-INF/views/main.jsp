@@ -10,10 +10,11 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<h3>관리시스템</h3>
 	<button type="button" onclick='location.href="<c:url value='/pages/add_category'/>"'>최상위 메뉴 추가</button><br>
 	<button type="button" onclick='location.href="<c:url value='/pages/add_category2'/>"'>하위 메뉴 추가</button><br>		
 	<button type="button" onclick='location.href="<c:url value='/pages/add_menu_item'/>"'>상품 추가</button><br>
-	<button type="button" onclick='location.href="<c:url value='/pages/add_img'/>"'>이미지 업로드 TEST</button><br>
+	<button type="button" onclick='location.href="<c:url value='/pages/add_img'/>"'>상품 이미지 등록</button><br>
 	<form action="find_all_category" method="post">			
     <button type="submit" class="btn btn-outline-secondary" type="button">모든 등록 카테고리 찾기</button>
 	</form>
@@ -23,6 +24,8 @@
     <form action="find_all_menu_image" method="post">
     <button type="submit" class="btn btn-outline-secondary" type="button">모든 등록 상품 이미지 코드 찾기</button>
     </form>
-   	<p><img src="<c:url value='/resources/upload_img/01b49a8f.jpg'/>" style="width:200px; height:200px;" ></p>   	
+   	<p><img src="<c:url value='/resources/upload_img/01b49a8f.jpg'/>" style="width:200px; height:200px;" ></p>
+   	
+	   	   	
 </body>
 </html>

@@ -13,11 +13,11 @@ SELECT count(*) FROM Customer;
 !DROP TABLE Customer;
 
 CREATE TABLE MenuCategory (
-	cateName 		VARCHAR(20)		NOT NULL,
+	cateName 		VARCHAR(20)		DEFAULT NULL,
 	cateCode		VARCHAR(20)		PRIMARY KEY,
-	cateCodeRef		VARCHAR(20)		DEFAULT NULL,
-	FOREIGN KEY (cateCodeRef) REFERENCES MenuCategory(cateCode)
+	cateCodeRef		VARCHAR(20)		DEFAULT NULL
 );
+	,FOREIGN KEY (cateCodeRef) REFERENCES MenuCategory(cateCode)
 
 SELECT * FROM MenuCategory;
 !DROP TABLE MenuCategory;
@@ -39,18 +39,18 @@ INSERT INTO MenuCategory (cateName, cateCode)
 VALUES ('카테고리 3', '300');
 
 CREATE TABLE MenuItem (
-	cateCodeRef		VARCHAR(20)		NOT NULL,
-	cateCode		VARCHAR(20)		NOT NULL,
-	menuName		VARCHAR(100)	NOT NULL,
-	menuPrice		DOUBLE			NOT NULL,
-	menuNum			INT				NOT NULL,
+	cateCodeRef		VARCHAR(20)		DEFAULT NULL,
+	cateCode		VARCHAR(20)		DEFAULT NULL,
+	menuName		VARCHAR(100)	DEFAULT NULL,
+	menuPrice		DOUBLE			DEFAULT NULL,
+	menuNum			INT				DEFAULT NULL,
 	menuStock		INT				DEFAULT NULL,
 	menuInfo		VARCHAR(500)	DEFAULT NULL,
 	menuImg			VARCHAR(200)	DEFAULT NULL,
-	regDate			TIMESTAMP		NOT NULL	DEFAULT CURRENT_TIMESTAMP,
+	regDate			TIMESTAMP		NOT NULL	DEFAULT CURRENT_TIMESTAMP
+);
 	FOREIGN KEY (cateCode) REFERENCES MenuCategory(cateCode),
 	FOREIGN KEY (cateCodeRef) REFERENCES MenuCategory(cateCodeRef)
-);
 
 SELECT * FROM MenuItem;
 !DROP TABLE MenuItem;
@@ -62,9 +62,7 @@ CREATE TABLE MenuImage(
 	cateCode		VARCHAR(20)		DEFAULT NULL,
 	imgName			VARCHAR(300)	DEFAULT NULL,
 	imgSource		VARCHAR(300)	DEFAULT NULL,
-	imgUrl			VARCHAR(300)	DEFAULT NULL,
-	
-	FOREIGN KEY (cateCode)	REFERENCES	MenuItem(cateCode)
+	imgUrl			VARCHAR(300)	DEFAULT NULL
 )AUTO_INCREMENT 1;
 
 SELECT * FROM MenuImage;

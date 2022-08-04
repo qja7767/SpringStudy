@@ -8,7 +8,7 @@ import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
-import com.varxyz.JavaCafe.domain.FindMenuItemCommand;
+import com.varxyz.JavaCafe.domain.MenuItemCommand;
 import com.varxyz.JavaCafe.domain.MenuImage;
 import com.varxyz.JavaCafe.domain.MenuItem;
 
@@ -62,22 +62,64 @@ public class MenuItemDao {
 		return jdbcTemplate.query(sql, new MenuItemRowMapper());
 	}
 	
-	//등록상품 + 상품이미지 조인
-	public List<FindMenuItemCommand> allFindMenu() {
+	//등록상품 + 상품이미지 조인 조회
+	public List<MenuItemCommand> allFindMenu() {
 		String sql = "SELECT * FROM MenuItem INNER JOIN MenuImage"
 				+ " ON MenuItem.menuImg = MenuImage.imgName";
 		
-		return jdbcTemplate.query(sql, new RowMapper<FindMenuItemCommand>() {
+		return jdbcTemplate.query(sql, new RowMapper<MenuItemCommand>() {
 			
-			public FindMenuItemCommand mapRow(ResultSet rs, int rowNum) throws SQLException {
-				FindMenuItemCommand findMenuItemCommand =
-						new FindMenuItemCommand(rs.getString("cateCodeRef"),
+			public MenuItemCommand mapRow(ResultSet rs, int rowNum) throws SQLException {
+				MenuItemCommand findMenuItemCommand =
+						new MenuItemCommand(rs.getString("cateCodeRef"),
+						rs.getString("cateCode"), rs.getString("menuName"), 
+			     		rs.getDouble("menuPrice"), rs.getString("menuInfo"), 
+				    	rs.getLong("imgCode"), rs.getString("imgName"), 
+     					rs.getString("imgSource"), rs.getString("imgUrl"));
+				return findMenuItemCommand;
+			}
+		});
+	}
+	
+	//등록상품 + 상품이미지 메뉴이름으로 조회
+	public List<MenuItemCommand> allFindMenuByMenuName(String menuName) {
+		String sql = "SELECT * FROM MenuItem INNER JOIN MenuImage"
+				+ " ON MenuItem.menuImg = MenuImage.imgName"
+				+ " WHERE MenuItem.menuName= ?";
+				
+		return jdbcTemplate.query(sql, new RowMapper<MenuItemCommand>() {
+			public MenuItemCommand mapRow(ResultSet rs, int rowNum)
+					throws SQLException {
+				MenuItemCommand findMenuItemCommand =
+						new MenuItemCommand(rs.getString("cateCodeRef"),
 						rs.getString("cateCode"), rs.getString("menuName"), 
 						rs.getDouble("menuPrice"), rs.getString("menuInfo"), 
 						rs.getLong("imgCode"), rs.getString("imgName"), 
 						rs.getString("imgSource"), rs.getString("imgUrl"));
 				return findMenuItemCommand;
 			}
-		});
+		}, menuName);
 	}
+		
+	//메뉴 아이템 업데이트하기
+	public void updateMenuItem(MenuItemCommand menuItemCommand, String menuName) {
+		String sql = "UPDATE MenuItem"
+				+ " SET cateCodeRef=?, cateCode=?,"
+				+ " menuName=?, menuPrice=?,"
+				+ " menuInfo=?, menuImg=? WHERE menuName=?";
+		jdbcTemplate.update(sql,
+				menuItemCommand.getCateCodeRef(), menuItemCommand.getCateCode(),
+				menuItemCommand.getMenuName(), menuItemCommand.getMenuPrice(),
+				menuItemCommand.getMenuInfo(), menuItemCommand.getImgName(),
+				menuName);
+	}
+	
+	//메뉴 아이템 삭제
+	public void deleteMenuItem(String menuName) {
+		String sql = "DELETE FROM MenuItem WHERE menuName=?";
+		jdbcTemplate.update(sql, menuName);
+	}
+
+
+	
 }

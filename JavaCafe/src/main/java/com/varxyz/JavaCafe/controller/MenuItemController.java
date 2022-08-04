@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.varxyz.JavaCafe.domain.MenuItemCommand;
 import com.varxyz.JavaCafe.domain.MenuCategory;
 import com.varxyz.JavaCafe.domain.MenuImage;
 import com.varxyz.JavaCafe.domain.MenuItem;
 import com.varxyz.JavaCafe.service.MenuCategoryServiceImpl;
+import com.varxyz.JavaCafe.service.MenuItemService;
 import com.varxyz.JavaCafe.service.MenuItemServiceImpl;
 
 @Controller("controller.menuItemController")
@@ -42,12 +45,12 @@ public class MenuItemController {
 	
 	@PostMapping("pages/add_menu_item")
 	public String addMenuItem(@ModelAttribute("menuItem")
-		MenuItem menuItem, Model model, HttpServletRequest request,
-		@RequestParam("imgSubmit") MultipartFile multipartFile ) throws IllegalStateException, IOException {
+		MenuItem menuItem, Model model, HttpServletRequest request)
+				throws IllegalStateException, IOException {
 		
 		menuItemService.addMenuItem(menuItem);
 		model.addAttribute("menuItem", menuItem);		
-					
+		
 		return "main";		
 	}
 	
@@ -101,23 +104,24 @@ public class MenuItemController {
 		
 		return "main";
 	}
-
-		
+	
 	@GetMapping("/pages/find_all_menu_image")
 	public String findAllMenuImageForm(HttpServletRequest request) {
 			
 		return "pages/find_all_menu_image";
 	}
-		
+	
 	@PostMapping("/pages/find_all_menu_image")
 	public String findAllMenuImage(HttpServletRequest request) {
 			
 		List<MenuImage> menuImageList = menuItemService.getAllMenuImage();
 		request.setAttribute("menuImageList", menuImageList);
-				
 		
 		return "pages/find_all_menu_image";
 	}
-		
+	
 }
+
+//HttpSession session = request.getSession();
+//session.setAttribute("userId", userId);
 
